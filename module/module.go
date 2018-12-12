@@ -1,10 +1,11 @@
 package module
 
 import (
-	"github.com/name5566/leaf/conf"
-	"github.com/name5566/leaf/log"
 	"runtime"
 	"sync"
+
+	"github.com/BenjaminDuchadeuil/leaf/conf"
+	"github.com/BenjaminDuchadeuil/leaf/log"
 )
 
 type Module interface {
