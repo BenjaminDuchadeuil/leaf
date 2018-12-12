@@ -3,6 +3,7 @@ package log
 import (
 	"errors"
 	"fmt"
+	"io"
 	"log"
 	"os"
 	"path"
@@ -65,8 +66,8 @@ func New(strLevel string, pathname string, flag int) (*Logger, error) {
 		if err != nil {
 			return nil, err
 		}
-
-		baseLogger = log.New(file, "", flag)
+		mw := io.MultiWriter(os.Stdout, file)
+		baseLogger = log.New(mw, "", flag)
 		baseFile = file
 	} else {
 		baseLogger = log.New(os.Stdout, "", flag)
