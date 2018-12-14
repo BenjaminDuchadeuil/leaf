@@ -1,11 +1,11 @@
 package module
 
 import (
-	g "leaf/go"
 	"time"
 
 	"github.com/BenjaminDuchadeuil/leaf/chanrpc"
 	"github.com/BenjaminDuchadeuil/leaf/console"
+	g "github.com/BenjaminDuchadeuil/leaf/go"
 	"github.com/BenjaminDuchadeuil/leaf/timer"
 )
 
