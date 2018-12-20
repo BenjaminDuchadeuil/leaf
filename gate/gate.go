@@ -1,6 +1,7 @@
 package gate
 
 import (
+	"fmt"
 	"net"
 	"reflect"
 	"time"
@@ -8,7 +9,14 @@ import (
 	"github.com/BenjaminDuchadeuil/leaf/chanrpc"
 	"github.com/BenjaminDuchadeuil/leaf/log"
 	"github.com/BenjaminDuchadeuil/leaf/network"
+	"github.com/BenjaminDuchadeuil/leaf/network/json"
 )
+
+var Processor = json.NewProcessor()
+
+func init() {
+	Processor.Register(&ErrorMessage{})
+}
 
 type Gate struct {
 	MaxConnNum      int
@@ -27,6 +35,10 @@ type Gate struct {
 	TCPAddr      string
 	LenMsgLen    int
 	LittleEndian bool
+}
+
+type ErrorMessage struct {
+	Description string
 }
 
 func (gate *Gate) Run(closeSig chan bool) {
@@ -102,6 +114,7 @@ func (a *agent) Run() {
 			msg, err := a.gate.Processor.Unmarshal(data)
 			if err != nil {
 				log.Debug("unmarshal message error: %v", err)
+				a.WriteMsg(&ErrorMessage{Description: fmt.Sprintf("Message envoyé non valide (type de message, type de variable): %v", err)})
 				break
 			}
 			err = a.gate.Processor.Route(msg, a)
