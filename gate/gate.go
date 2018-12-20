@@ -114,7 +114,7 @@ func (a *agent) Run() {
 			msg, err := a.gate.Processor.Unmarshal(data)
 			if err != nil {
 				log.Debug("unmarshal message error: %v", err)
-				a.WriteMsg(&ErrorMessage{Description: fmt.Sprintf("Message envoyé non valide (type de message, type de variable): %v", err)})
+				a.WriteMsg(&ErrorMessage{Description: fmt.Sprintf("Message envoyé non valide (type de message, type de variable): %v. Vous avez été déconnecté", err)})
 				break
 			}
 			err = a.gate.Processor.Route(msg, a)
