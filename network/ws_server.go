@@ -85,19 +85,19 @@ func (server *WSServer) Start() {
 
 	if server.MaxConnNum <= 0 {
 		server.MaxConnNum = 100
-		log.Warning("invalid MaxConnNum, reset to %v", server.MaxConnNum)
+		log.Release("invalid MaxConnNum, reset to %v", server.MaxConnNum)
 	}
 	if server.PendingWriteNum <= 0 {
 		server.PendingWriteNum = 100
-		log.Warning("invalid PendingWriteNum, reset to %v", server.PendingWriteNum)
+		log.Release("invalid PendingWriteNum, reset to %v", server.PendingWriteNum)
 	}
 	if server.MaxMsgLen <= 0 {
 		server.MaxMsgLen = 4096
-		log.Warning("invalid MaxMsgLen, reset to %v", server.MaxMsgLen)
+		log.Release("invalid MaxMsgLen, reset to %v", server.MaxMsgLen)
 	}
 	if server.HTTPTimeout <= 0 {
 		server.HTTPTimeout = 10 * time.Second
-		log.Warning("invalid HTTPTimeout, reset to %v", server.HTTPTimeout)
+		log.Release("invalid HTTPTimeout, reset to %v", server.HTTPTimeout)
 	}
 	if server.NewAgent == nil {
 		log.Fatal("NewAgent must not be nil")
