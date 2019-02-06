@@ -22,7 +22,7 @@ func Run(mods ...module.Module) {
 		defer logger.Close()
 	}
 
-	log.Release("Leaf %v starting up", version)
+	log.Release("Serveur lancé")
 
 	// module
 	for i := 0; i < len(mods); i++ {
@@ -40,7 +40,7 @@ func Run(mods ...module.Module) {
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt, os.Kill)
 	sig := <-c
-	log.Release("Leaf closing down (signal: %v)", sig)
+	log.Release("Fermeture du serveur (signal: %v)", sig)
 	console.Destroy()
 	cluster.Destroy()
 	module.Destroy()
